@@ -5,6 +5,8 @@ programming language. In contrast to the [Rust reference], it only
 provides one type of material: the syntax that informally describes each
 language construct and its use.
 
+This book's content was originally based upon the [Rust Reference](https://doc.rust-lang.org/nightly/reference/) ([source code](https://github.com/rust-lang/reference)) and it attempts to track changes there, as they impact Oxur.
+
 <div class="warning">
 
 Warning: This book is incomplete. Documenting everything takes a while. See
