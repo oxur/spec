@@ -6,7 +6,9 @@
 
 ## Dependencies
 
-- mdbook (use `cargo install mdbook` to install it).
+- `make`
+- `cargo`
+- `mdbook` (use `cargo install mdbook` to install it).
 
 ## Build steps
 
