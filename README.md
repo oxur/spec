@@ -13,7 +13,7 @@
 Generate the book:
 
 ```bash
-mdbook build
+make
 ```
 
 The generated HTML will be in the `book` folder.
