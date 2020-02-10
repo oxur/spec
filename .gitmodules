@@ -1,0 +1,4 @@
+[submodule "book"]
+	path = book
+	url = git@github.com:oxur/spec.git
+	branch = gh-pages
