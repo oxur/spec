@@ -4,6 +4,11 @@
 
 [![][logo]][logo-large]
 
+## Rust and Lisp
+
+* This repo's book: [https://oxur.github.io/spec/](https://oxur.github.io/spec/)
+* The original Rust book: [https://doc.rust-lang.org/stable/reference/](https://doc.rust-lang.org/stable/reference/)
+
 ## Dependencies
 
 - `make`
