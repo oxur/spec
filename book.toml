@@ -1,0 +1,8 @@
+[book]
+
+title = "The Oxur Specification"
+author = "The Oxur Group"
+
+[output.html]
+additional-css = ["theme/reference.css"]
+git-repository-url = "https://github.com/oxur/spec/"
