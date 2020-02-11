@@ -117,7 +117,6 @@ comments.
        require an item that will receive the doc |#
 
     ;;; Where is my item?
-#   (mod boo)
 }
 ```
 
