@@ -155,6 +155,25 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#whitespace" id="whitespace">Whitespace</a></h1>
+<p>Whitespace is any non-empty string containing only characters that have the
+<code>Pattern_White_Space</code> Unicode property, namely:</p>
+<ul>
+<li><code>U+0009</code> (horizontal tab, <code>'\t'</code>)</li>
+<li><code>U+000A</code> (line feed, <code>'\n'</code>)</li>
+<li><code>U+000B</code> (vertical tab)</li>
+<li><code>U+000C</code> (form feed)</li>
+<li><code>U+000D</code> (carriage return, <code>'\r'</code>)</li>
+<li><code>U+0020</code> (space, <code>' '</code>)</li>
+<li><code>U+0085</code> (next line)</li>
+<li><code>U+200E</code> (left-to-right mark)</li>
+<li><code>U+200F</code> (right-to-left mark)</li>
+<li><code>U+2028</code> (line separator)</li>
+<li><code>U+2029</code> (paragraph separator)</li>
+</ul>
+<p>Oxur is a &quot;free-form&quot; language, meaning that all forms of whitespace serve only
+to separate <em>tokens</em> in the grammar, and have no semantic significance.</p>
+<p>An Oxur program has identical meaning if each whitespace element is replaced
+with any other legal whitespace element, such as a single space character.</p>
 
                     </main>
 
