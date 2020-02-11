@@ -31,8 +31,8 @@ Examples:
 ```lisp
 (use std::io::(self Write))
 (mod m
-    #[clippy::cyclomatic_complexity = "0"]
-    (pub (in super) (fn f1 ())))
+  #[clippy::cyclomatic_complexity = "0"]
+  (pub (in super) (fn f1 ())))
 ```
 
 ### Paths in expressions
@@ -138,12 +138,10 @@ because there is no ambiguity like there is in _PathInExpression_.
 
 ```lisp
 (impl ops::Index<ops::Range<usize>> for S
-  #| ... |#
-  )
+  #| ... |#)
 
-(fn i<'a> () -> (impl Iterator<Item ops::Example<'a>>
-    ;; ...
-  )
+(fn i<'a> () -> (impl Iterator<Item ops::Example<'a>>)
+  #| ... |#)
 
 (type G std::boxed::Box<dyn std::ops::FnOnce(isize) -> isize>)
 ```
@@ -170,9 +168,9 @@ item.
   (pub fn foo ()))
 (mod b
   (pub fn foo ()
-        ::a::(foo) ;; call `a`'s foo function
-        ;; In Rust 2018, `::a` would be interpreted as the crate `a`.
-  ))
+    ;; call `a`'s foo function
+    ;; Note that in Rust 2018, `::a` would be interpreted as the crate `a`.
+    ::a::(foo)))
 ```
 
 ### `self`
@@ -194,7 +192,7 @@ first segment, without a preceding `::`.
 `Self` can only be used as the first segment, without a preceding `::`.
 
 ```lisp
-(trait T 
+(trait T
   (type Item)
   (const C: i32)
   ;; `Self` will be whatever type that implements `T`.
@@ -206,11 +204,13 @@ first segment, without a preceding `::`.
 (impl T for S
   (type Item i32)
   (const C: i32 9)
-  (fn new () -> Self           ;; `Self` is the type `S`.
-    S))
-  (fn f (&self) -> Self::Item  ;; `Self::Item` is the type `i32`.
-      Self::C                  ;; `Self::C` is the constant value `9`.
-    ))
+  ;; `Self` is the type `S`.
+  (fn new () -> Self
+    S)
+  ;; `Self::Item` is the type `i32`.
+  (fn f (&self) -> Self::Item
+      ;; `Self::C` is the constant value `9`.
+      Self::C))
 ```
 
 ### `super`
@@ -269,7 +269,7 @@ invoked.
 
 #[macro_export]
 (macro_rules! inc
-    ($x:expr) => ( $crate::increment($x) ))
+  ($x:expr) => ( $crate::increment($x)))
 ```
 
 ## Canonical paths
@@ -313,21 +313,21 @@ the crate.
   (impl Struct
     (fn g (&self))))  ;; <::a::Struct>::g
 
-(mod without ;; ::without
-  (fn canonicals ()        ;; ::without::canonicals
-      (struct OtherStruct) ;; None
+(mod without             ;; ::without
+  (fn canonicals ()      ;; ::without::canonicals
+    (struct OtherStruct) ;; None
 
-      (trait OtherTrait    ;; None
-        (fn g (&self)))    ;; None
+    (trait OtherTrait    ;; None
+      (fn g (&self)))    ;; None
 
-      (impl OtherTrait for OtherStruct
-        (fn g (&self)))    ;; None
+    (impl OtherTrait for OtherStruct
+      (fn g (&self)))    ;; None
 
-      (impl OtherTrait for ::a::Struct
-        (fn g (&self)))    ;; None
+    (impl OtherTrait for ::a::Struct
+      (fn g (&self)))    ;; None
 
-      (impl ::a::Trait for OtherStruct
-        (fn f (&self)))))  ;; None
+    (impl ::a::Trait for OtherStruct
+      (fn f (&self)))))  ;; None
 ```
 
 [_GenericArgs_]: #paths-in-expressions
