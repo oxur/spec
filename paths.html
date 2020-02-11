@@ -178,8 +178,8 @@ x::y::z;
 Examples:</p>
 <pre><code class="language-lisp">(use std::io::(self Write))
 (mod m
-    #[clippy::cyclomatic_complexity = &quot;0&quot;]
-    (pub (in super) (fn f1 ())))
+  #[clippy::cyclomatic_complexity = &quot;0&quot;]
+  (pub (in super) (fn f1 ())))
 </code></pre>
 <h3><a class="header" href="#paths-in-expressions" id="paths-in-expressions">Paths in expressions</a></h3>
 <blockquote>
@@ -262,12 +262,10 @@ and qualified paths.</p>
 <p>Although the <code>::</code> token is allowed before the generics arguments, it is not required
 because there is no ambiguity like there is in <em>PathInExpression</em>.</p>
 <pre><code class="language-lisp">(impl ops::Index&lt;ops::Range&lt;usize&gt;&gt; for S
-  #| ... |#
-  )
+  #| ... |#)
 
-(fn i&lt;'a&gt; () -&gt; (impl Iterator&lt;Item ops::Example&lt;'a&gt;&gt;
-    ;; ...
-  )
+(fn i&lt;'a&gt; () -&gt; (impl Iterator&lt;Item ops::Example&lt;'a&gt;&gt;)
+  #| ... |#)
 
 (type G std::boxed::Box&lt;dyn std::ops::FnOnce(isize) -&gt; isize&gt;)
 </code></pre>
@@ -288,9 +286,9 @@ items in the top level of the crate (including <code>use</code> imports).</p>
   (pub fn foo ()))
 (mod b
   (pub fn foo ()
-        ::a::(foo) ;; call `a`'s foo function
-        ;; In Rust 2018, `::a` would be interpreted as the crate `a`.
-  ))
+    ;; call `a`'s foo function
+    ;; Note that in Rust 2018, `::a` would be interpreted as the crate `a`.
+    ::a::(foo)))
 </code></pre>
 <h3><a class="header" href="#self" id="self"><code>self</code></a></h3>
 <p><code>self</code> resolves the path relative to the current module. <code>self</code> can only be used as the
@@ -303,7 +301,7 @@ first segment, without a preceding <code>::</code>.</p>
 <p><code>Self</code>, with a capital &quot;S&quot;, is used to refer to the implementing type within
 <a href="items/traits.html">traits</a> and <a href="items/implementations.html">implementations</a>.</p>
 <p><code>Self</code> can only be used as the first segment, without a preceding <code>::</code>.</p>
-<pre><code class="language-lisp">(trait T 
+<pre><code class="language-lisp">(trait T
   (type Item)
   (const C: i32)
   ;; `Self` will be whatever type that implements `T`.
@@ -315,11 +313,13 @@ first segment, without a preceding <code>::</code>.</p>
 (impl T for S
   (type Item i32)
   (const C: i32 9)
-  (fn new () -&gt; Self           ;; `Self` is the type `S`.
-    S))
-  (fn f (&amp;self) -&gt; Self::Item  ;; `Self::Item` is the type `i32`.
-      Self::C                  ;; `Self::C` is the constant value `9`.
-    ))
+  ;; `Self` is the type `S`.
+  (fn new () -&gt; Self
+    S)
+  ;; `Self::Item` is the type `i32`.
+  (fn f (&amp;self) -&gt; Self::Item
+      ;; `Self::C` is the constant value `9`.
+      Self::C))
 </code></pre>
 <h3><a class="header" href="#super" id="super"><code>super</code></a></h3>
 <p><code>super</code> in a path resolves to the parent module. It may only be used in leading
@@ -363,7 +363,7 @@ invoked.</p>
 
 #[macro_export]
 (macro_rules! inc
-    ($x:expr) =&gt; ( $crate::increment($x) ))
+  ($x:expr) =&gt; ( $crate::increment($x)))
 </code></pre>
 <h2><a class="header" href="#canonical-paths" id="canonical-paths">Canonical paths</a></h2>
 <p>Items defined in a module or implementation have a <em>canonical path</em> that
@@ -400,21 +400,21 @@ the crate.</p>
   (impl Struct
     (fn g (&amp;self))))  ;; &lt;::a::Struct&gt;::g
 
-(mod without ;; ::without
-  (fn canonicals ()        ;; ::without::canonicals
-      (struct OtherStruct) ;; None
+(mod without             ;; ::without
+  (fn canonicals ()      ;; ::without::canonicals
+    (struct OtherStruct) ;; None
 
-      (trait OtherTrait    ;; None
-        (fn g (&amp;self)))    ;; None
+    (trait OtherTrait    ;; None
+      (fn g (&amp;self)))    ;; None
 
-      (impl OtherTrait for OtherStruct
-        (fn g (&amp;self)))    ;; None
+    (impl OtherTrait for OtherStruct
+      (fn g (&amp;self)))    ;; None
 
-      (impl OtherTrait for ::a::Struct
-        (fn g (&amp;self)))    ;; None
+    (impl OtherTrait for ::a::Struct
+      (fn g (&amp;self)))    ;; None
 
-      (impl ::a::Trait for OtherStruct
-        (fn f (&amp;self)))))  ;; None
+    (impl ::a::Trait for OtherStruct
+      (fn f (&amp;self)))))  ;; None
 </code></pre>
 
                     </main>
